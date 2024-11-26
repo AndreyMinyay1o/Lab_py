@@ -1,0 +1,60 @@
+import re
+
+class Reader:
+    def __init__(self, surname, name, patronymic, address, phone):
+        self.set_surname(surname)
+        self.set_name(name)
+        self.set_patronymic(patronymic)
+        self.set_address(address)
+        self.set_phone(phone)
+
+
+    @property
+    def surname(self):
+        return self._surname
+
+    @surname.setter
+    def surname(self, value):
+        if not value.isalpha():
+            raise ValueError("Фамилия должна содержать только буквы.")
+        self._surname = value.capitalize()
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        if not value.isalpha():
+            raise ValueError("Имя должно содержать только буквы.")
+        self._name = value.capitalize()
+
+    @property
+    def patronymic(self):
+        return self._patronymic
+
+    @patronymic.setter
+    def patronymic(self, value):
+        if not value.isalpha():
+            raise ValueError("Отчество должно содержать только буквы.")
+        self._patronymic = value.capitalize()
+
+    @property
+    def address(self):
+        return self._address
+
+    @address.setter
+    def address(self, value):
+        if len(value) < 5:
+            raise ValueError("Адрес должен быть не менее 5 символов.")
+        self._address = value
+
+    @property
+    def phone(self):
+        return self._phone
+
+    @phone.setter
+    def phone(self, value):
+        if not re.match(r'^\+?\d{10,15}$', value):
+            raise ValueError("Телефон должен быть в формате +XXXXXXXXXXX.")
+        self._phone = value
